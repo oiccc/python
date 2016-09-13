@@ -1,5 +1,87 @@
-http://www.microdone.cn:800/DemoALLNew/
-选择第一个集成登录演示
-登录集成演示，下载浏览器插件
-帮忙分析一下这个浏览器插件有没有键盘记录类似的后门功能
-最好从静态源码和动态的调用里找到处理登录框输入的地方
+redis:
+/usr/local/bin/redis-server /etc/redis/redis.conf
+
+!!password
+
+mongodb:
+ ./bin/mongod --dbpath=./db --logpath=./log/mongodb.log --fork
+ ./bin/mongod --dbpath=./db --logpath=./log/mongodb.log --fork --auth
+
+
+nginx:   /usr/local/nginx/conf/
+配置文件：
+     /usr/local/nginx/conf/nginx.conf
+
+vim /usr/lib/systemd/system/nginx.service 
+
+[Unit]
+Description=nginx - high performance web server
+Documentation=http://nginx.org/en/docs/
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/usr/local/nginx/logs/nginx.pid
+ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf
+ExecStart=/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl start nginx.service
+
+
+
+
+./configure --prefix=/usr/local/php  --enable-fpm --with-mcrypt --enable-mbstring --disable-pdo --with-curl --disable-debug 
+
+--disable-rpath --enable-inline-optimization --with-bz2  --with-zlib --enable-sockets --enable-sysvsem --enable-sysvshm --
+
+enable-pcntl --enable-mbregex --with-mhash --enable-zip --with-pcre-regex --with-mysql --with-mysqli --with-gd --with-
+
+jpeg-dir
+
+
+
+php-fpm:
+service php-fpm start
+
+
+
+
+
+
+
+
+
+openresty:
+nginx -p `pwd`/ -c conf/nginx.conf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
